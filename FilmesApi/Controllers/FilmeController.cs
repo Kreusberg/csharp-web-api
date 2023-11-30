@@ -11,13 +11,13 @@ public class FilmeController : ControllerBase
     private static int id = 0;
 
     [HttpPost] //             Aqui é indicado de que o parâmetro virá do corpo da requisição
-    public void AdicionaFilme([FromBody] Filme filme)
+    public IActionResult AdicionaFilme([FromBody] Filme filme)
     {
 
         filme.Id = id++;
-        filmes.Add(filme);
-        Console.WriteLine(filme.Titulo);
-        Console.WriteLine(filme.Duracao);
+        filmes.Add(filme); //                              parâmetros necessários para retornar este valor
+        return CreatedAtAction(nameof(RecuperaFilmePorId), new { id = filme.Id}, filme);
+//                          método executado para retornar este valor ||||       objeto criado         
     }
 
     [HttpGet]
@@ -27,8 +27,11 @@ public class FilmeController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public Filme? RecuperaFilmePorId(int id)
+    public IActionResult RecuperaFilmePorId(int id)
     {
-        return filmes.FirstOrDefault(filme => filme.Id == id);
+        var filme = filmes.FirstOrDefault(filme => filme.Id == id);
+
+        if (filme == null) return NotFound();
+        return Ok(filme);
     }
 }

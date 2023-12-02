@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "N71msVyW9e7AyvMXFjIwcIskY7tFGxSotNtvSIgNbbvtjgAs25qD84FJSezqogccPkLFa6Pj+2wsNJwt705c9A==",
+  "dgSpecHash": "2krdw4wuPVJ6odxcPDW5AVh7KTY3MzwNMQEnXjlupZ+/fJQ8BQq4+Wy4tSxxqVe8y10xl2/XSQy0IqxMOQCQAw==",
   "success": true,
   "projectFilePath": "C:\\Users\\kreus\\source\\repos\\FilmesApi\\FilmesApi\\FilmesApi.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\kreus\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
+    "C:\\Users\\kreus\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\kreus\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\kreus\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\kreus\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

@@ -26,9 +26,9 @@ public class FilmeController : ControllerBase
         Filme filme = _mapper.Map<Filme>(filmeDto);
         _context.Filmes.Add(filme);
         _context.SaveChanges();
-         //                              parâmetros necessários para retornar este valor
-        return CreatedAtAction(nameof(RecuperaFilmePorId), new { id = filme.Id}, filme);
-//                          método executado para retornar este valor ||||       objeto criado         
+        //                              parâmetros necessários para retornar este valor
+        return CreatedAtAction(nameof(RecuperaFilmePorId), new { id = filme.Id }, filme);
+        //                          método executado para retornar este valor ||||       objeto criado         
     }
 
     [HttpGet]
@@ -44,5 +44,19 @@ public class FilmeController : ControllerBase
 
         if (filme == null) return NotFound();
         return Ok(filme);
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult AtualizaFilme(int id, [FromBody] UpdateFilmeDto filmeDto)
+    {
+        var filme = _context.Filmes.FirstOrDefault(
+            filme => filme.Id == id);
+
+        if (filme == null) return NotFound();
+
+        _mapper.Map(filmeDto, filme);
+        _context.SaveChanges();
+
+        return NoContent();
     }
 }

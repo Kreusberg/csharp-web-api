@@ -2,6 +2,7 @@
 using FilmesApi.Data;
 using FilmesApi.Data.Dtos;
 using FilmesApi.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FilmesApi.Controllers;
@@ -59,4 +60,32 @@ public class FilmeController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpPatch("{id}")]
+    public IActionResult AtualizaFilmeParcial(int id, JsonPatchDocument<UpdateFilmeDto> patch)
+    {
+        var filme = _context.Filmes.FirstOrDefault(
+            filme => filme.Id == id);
+
+        if (filme == null) return NotFound();
+
+//      converte de filme para UpdateFilmeDto
+        var filmeParaAtualizar = _mapper.Map<UpdateFilmeDto>(filme);
+
+//      aplica as mudanças
+        patch.ApplyTo(filmeParaAtualizar, ModelState);
+
+//      se não for válido, lança uma exceção
+        if (!TryValidateModel(filmeParaAtualizar))
+        {
+            return ValidationProblem(ModelState);
+        }
+
+//      mapeia de filmeParaAtualizar para um filme
+        _mapper.Map(filmeParaAtualizar, filme);
+        _context.SaveChanges();
+
+        return NoContent();
+    }
+
 }
